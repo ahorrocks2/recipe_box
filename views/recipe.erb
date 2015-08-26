@@ -3,13 +3,13 @@
 <h4>How to Make: <%= @recipe.instruction %></h4>
 
 
+<ul class="list-inline">
+  <% @recipe.categories().each() do |category| %>
+    <li><a href="/categories/<%= category.id %>"><%= category.name() %></a></li>
+    <% end %>
+</ul>
 
-<% @recipe.categories().each() do |category| %>
-  <p><%= category.name() %> </p>
-<% end %>
-
-
-<br>
+<!-- <br>
 <form action="/recipes/<%=@recipe.id() %>" method="post">
   <input type="hidden" name="_method" value="patch">
   <% if @categories.any?() %>
@@ -18,9 +18,9 @@
     <option value="<%= category.id %>"> <%= category.name %> </option>
     <% end %>
   </select>
-  <% end %>
   <button type="submit" class="btn-default">Add Category</button>
 </form>
+  <% end %> -->
 
 <br>
 <form action="/recipes/<%=@recipe.id() %>" method="post">

@@ -9,39 +9,40 @@ get('/') do
   erb(:index)
 end
 
-    get('/recipe_form') do
-      @categories = Category.all()
-      erb(:recipe_form)
-    end
+#-------------------------------------------------------#
+get('/recipe_form') do
+  @categories = Category.all()
+  erb(:recipe_form)
+end
 
-    post('/recipes') do
-      name = params.fetch("name")
-      ingredient = params.fetch("ingredient")
-      instruction = params.fetch("instruction")
-      recipe = Recipe.create({:name => name, :ingredient => ingredient, :instruction => instruction})
-      redirect('/')
-    end
+post('/recipes') do
+  name = params.fetch("name")
+  ingredient = params.fetch("ingredient")
+  instruction = params.fetch("instruction")
+  recipe = Recipe.create({:name => name, :ingredient => ingredient, :instruction => instruction})
+  redirect('/')
+end
 
-    get('/recipes/:id') do
-      @recipe = Recipe.find(params.fetch('id'))
-      @categories = Category.all()
-      erb(:recipe)
-    end
+get('/recipes/:id') do
+  @recipe = Recipe.find(params.fetch('id'))
+  @categories = Category.all()
+  erb(:recipe)
+end
 
-    patch('/recipes/:id') do
-      category = Category.find(params.fetch("category_id"))
-      @recipe = Recipe.find(id)
-      @recipe.categories.push(category)
-      redirect("/recipes/#{@recipe.id}")
-    end
+patch('/recipes/:id') do
+  category = Category.find(params.fetch("category_id"))
+  @recipe = Recipe.find(params.fetch('id'))
+  @recipe.categories.push(category)
+  redirect("/recipes/#{@recipe.id}")
+end
 
-    delete('/recipes/:id') do
-      id = params.fetch("id").to_i()
-      @recipe = Recipe.find(id)
-      @recipe.destroy()
-      redirect("/")
-    end
-
+delete('/recipes/:id') do
+  id = params.fetch("id").to_i()
+  @recipe = Recipe.find(id)
+  @recipe.destroy()
+  redirect("/")
+end
+#-------------------------------------------------------#
 get('/category_form') do
   erb(:category_form)
 end

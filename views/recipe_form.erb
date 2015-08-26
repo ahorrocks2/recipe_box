@@ -1,0 +1,16 @@
+<h2>Add new recipe</h2>
+
+<form action="/recipes" method="post">
+  <input id="name" name="name" type="text" placeholder="Recipe Name">
+  <input id="ingredient" name="ingredient" type="text" placeholder="Add ingredients">
+  <input id="instruction" name="instruction" type="text" placeholder="Add instructions">
+
+  <% if @categories.any?() %>
+    <label for="category_id">Select Category</label>
+    <select id="category_id" name='category_id' type='text' class="form-control">
+      <% @categories.each() do |category| %>
+        <option value="<%= category.id %>"> <%= category.name %> </option>
+      <% end %>
+    </select>
+  <button type="submit" class="btn-default">Add Recipe</button>
+</form>

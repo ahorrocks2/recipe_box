@@ -1,0 +1,13 @@
+<h2><%= @category.name() %> Recipes.</h2>
+
+
+<% if @category.recipes().any?() %>
+  <ul>
+    <% @category.recipes().each() do |recipe| %>
+      <li><%= recipe.name %></li>
+      <% end %>
+  </ul>
+<% else %>
+    <p>No <%= @category.name() %> recipes.</p>
+    <a href="/recipes_form" class="btn-sm btn-default" role="button">Add a Recipe</a>
+<% end %>

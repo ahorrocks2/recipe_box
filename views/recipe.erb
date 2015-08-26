@@ -2,4 +2,24 @@
 <h4><%= @recipe.ingredient %></h4>
 <h4><%= @recipe.instruction %></h4>
 
+
+
+<% @recipe.categories().each() do |category| %>
+  <p><%= category.name() %> </p>
+<% end %>
+
+
+
+<form action="/recipes/<%=@recipe.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <% if @categories.any?() %>
+  <select id="category_id" name='category_id' type='text' class="form-control">
+    <% @categories.each() do |category| %>
+    <option value="<%= category.id %>"> <%= category.name %> </option>
+    <% end %>
+  </select>
+  <% end %>
+  <button type="submit" class="btn-default">Add Category</button>
+</form>
+
 <a href="/">Back</a>

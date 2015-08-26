@@ -1,36 +1,28 @@
 <h1>Recipe Book</h1>
 
+<h5>Recipes:</h5>
+<% if @recipes.any?() %>
+  <% @recipes.each() do |recipe| %>
+    <a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a><br>
+  <% end %>
+<% else %>
+  <p>No recipes yet</p>
+<% end %>
 
-
-
-  <div class="row">
-
-    <% if @recipes.any?() %>
-      <% @recipes.each() do |recipe| %>
-        <a href="/recipes/<%= recipe.id() %>"><%= recipe.name() %></a><br>
-      <% end %>
-    <% else %>
-      <p>No recipes yet</p>
-    <% end %>
-
-    <br>
-    <a href ='/recipe_form' class="btn-sm btn-success" role="button">Add a Recipe</a>
-
+<a href ='/recipe_form' class="btn-sm btn-success" role="button">Add a Recipe</a>
 
 
 <br>
 <br>
 
 
-    <% if @categories.any? %>
-      <% @categories.each() do |category| %>
-        <a href="/categories/<%= category.id() %>"><%= category.name() %></a><br>
-      <% end %>
-    <% else %>
-      <p>No categories yet</p>
-    <% end %>
+<h5>Categories:</h5>
+<% if @categories.any? %>
+  <% @categories.each() do |category| %>
+    <a href="/categories/<%= category.id() %>"><%= category.name() %></a><br>
+  <% end %>
+<% else %>
+  <p>No categories yet</p>
+<% end %>
 
-    <br>
-    <a href="/category_form" class="btn-sm btn-success" role="button">Add a Category</a>
-
-  </div>
+<a href="/category_form" class="btn-sm btn-success" role="button">Add a Category</a>

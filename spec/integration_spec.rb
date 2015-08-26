@@ -7,4 +7,10 @@ describe('the recipe path', {:type => :feature}) do
     visit('/')
     expect(page).to have_content("Cream Cheese Bagel")
   end
+
+  it('brings user to recipe creation form') do
+    visit('/')
+    click_link('Add a Recipe')
+    expect(page).to have_content("Add new recipe")
+  end
 end

@@ -9,5 +9,24 @@
   </ul>
 <% else %>
     <p>No <%= @category.name() %> recipes.</p>
-    <a href="/recipes_form" class="btn-sm btn-default" role="button">Add a Recipe</a>
 <% end %>
+
+
+<br>
+<form action="/categories/<%=@category.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <% if @recipes.any?() %>
+  <select id="recipe_id" name='recipe_id' type='text' class="form-control">
+    <% @recipes.each() do |recipe| %>
+    <option value="<%= recipe.id %>"> <%= recipe.name %> </option>
+    <% end %>
+  </select>
+  <% end %>
+  <button type="submit" class="btn-default">Add Recipe</button>
+</form>
+
+<br>
+<form action="/categories/<%=@category.id() %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button class="btn-sm btn-default" type="submit">Delete Category</button>
+</form>

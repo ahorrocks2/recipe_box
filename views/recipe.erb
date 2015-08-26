@@ -1,6 +1,6 @@
 <h2><%= @recipe.name %></h2>
-<h4><%= @recipe.ingredient %></h4>
-<h4><%= @recipe.instruction %></h4>
+<h4>Ingredients: <%= @recipe.ingredient %></h4>
+<h4>How to Make: <%= @recipe.instruction %></h4>
 
 
 
@@ -9,7 +9,7 @@
 <% end %>
 
 
-
+<br>
 <form action="/recipes/<%=@recipe.id() %>" method="post">
   <input type="hidden" name="_method" value="patch">
   <% if @categories.any?() %>
@@ -20,6 +20,12 @@
   </select>
   <% end %>
   <button type="submit" class="btn-default">Add Category</button>
+</form>
+
+<br>
+<form action="/recipes/<%=@recipe.id() %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button class="btn-sm btn-default" type="submit">Delete Recipe</button>
 </form>
 
 <a href="/">Back</a>

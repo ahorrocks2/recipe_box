@@ -20,7 +20,7 @@ post('/recipes') do
   instruction = params.fetch("instruction")
   category_id = params.fetch("category_id").to_i()
   recipe = Recipe.create({:name => name, :ingredient => ingredient, :instruction => instruction})
-  recipe.update({:category_ids => category_id})
+  recipe.update({:category_ids => [category_id]})
   redirect('/')
 end
 
@@ -34,8 +34,15 @@ patch('/recipes/:id') do
   category_id = params.fetch("category_id").to_i()
   id = params.fetch("id").to_i()
   @recipe = Recipe.find(id)
-  @recipe.update({:category_ids => category_id})
+  @recipe.update({:category_ids => [category_id]})
   redirect("/recipes/#{id}")
+end
+
+delete('/recipes/:id') do
+  id = params.fetch("id").to_i()
+  @recipe = Recipe.find(id)
+  @recipe.destroy()
+  redirect("/")
 end
 
 get('/category_form') do
@@ -50,5 +57,20 @@ end
 
 get('/categories/:id') do
   @category = Category.find(params.fetch("id").to_i)
+  @recipes = Recipe.all()
   erb(:category)
+end
+
+patch('/categories/:id') do
+  @category = Category.find(params.fetch('id').to_i())
+  recipe_id = params.fetch('recipe_id')
+  @category.update({:recipe_ids => recipe_id})
+  redirect("/categories/#{@category.id}")
+end
+
+delete('/categories/:id') do
+  id = params.fetch("id").to_i()
+  @category = Category.find(id)
+  @category.destroy()
+  redirect("/")
 end

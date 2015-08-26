@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20150826165840) do
   end
 
   create_table "categories_recipes", force: :cascade do |t|
-    t.integer  "category_id"
-    t.integer  "recipe_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "recipe_id"
+    t.integer  "category_id"
   end
 
   create_table "recipes", force: :cascade do |t|

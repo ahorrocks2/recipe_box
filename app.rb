@@ -17,22 +17,28 @@ end
 
 post('/recipes') do
   name = params.fetch("name")
-  ingredient = params.fetch("ingredient")
-  instruction = params.fetch("instruction")
-  recipe = Recipe.create({:name => name, :instruction => instruction})
+  recipe = Recipe.create({:name => name, :instruction => nil})
   redirect('/')
 end
 
 get('/recipes/:id') do
-  @recipe = Recipe.find(params.fetch('id'))
+  @recipe = Recipe.find(params.fetch('id').to_i())
   @categories = Category.all()
   erb(:recipe)
 end
 
 patch('/recipes/:id') do
-  category = Category.find(params.fetch("category_id"))
+  instruction = params.fetch("instruction")
   @recipe = Recipe.find(params.fetch('id'))
-  @recipe.categories.push(category)
+  @recipe.update({:instruction => instruction})
+  redirect("/recipes/#{@recipe.id}")
+end
+
+patch('/recipes/:id/edit') do
+  @recipe = Recipe.find(params.fetch("id"))
+  ingredient = params.fetch('ingredient_name')
+  new_ingredient = Ingredient.create({:name => ingredient})
+  @recipe.ingredients().push(new_ingredient)
   redirect("/recipes/#{@recipe.id}")
 end
 

@@ -1,7 +1,38 @@
 <h2><%= @recipe.name %></h2>
 
-<h4>How to Make: <%= @recipe.instruction %></h4>
+<% if @recipe.instruction() %>
+  <h4>How to make: <%= @recipe.instruction() %></h4>
+  <% else %>
+  <p>Please add instructions</p>
+<% end %>
 
+<% if @recipe.ingredients().any?() %>
+  <h4>Ingredients: <% @recipe.ingredients().each() do |ingredient| %>
+      <a href="/ingredients/<%= ingredient.id() %>"><%= ingredient.name() %></a>
+      <% end %>
+<% else %>
+  <p>Please add ingredients</p>
+<% end %>
+
+<form action="/recipes/<%=@recipe.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input id="instruction" name="instruction" type="text" placeholder="Instructions">
+  <button class="btn-sm btn-default" type="submit">Update Instructions</button>
+</form>
+
+<% if @recipe.ingredients().empty?() %>
+  <form action="/recipes/<%=@recipe.id() %>/edit" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input id="ingredient_name" name="ingredient_name" type="text" placeholder="Ingredients">
+    <button class="btn-sm btn-default" type="submit">Add an Ingredient</button>
+  </form>
+<% else %>
+  <form action="/recipes/<%=@recipe.id() %>/edit" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input id="ingredient_name" name="ingredient_name" type="text" placeholder="Ingredients">
+    <button class="btn-sm btn-success" type="submit">Add another Ingredient!</button>
+  </form>
+<% end %>
 
 <ul class="list-inline">
   <% @recipe.categories().each() do |category| %>

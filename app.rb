@@ -36,9 +36,11 @@ end
 
 patch('/recipes/:id/edit') do
   @recipe = Recipe.find(params.fetch("id"))
-  ingredient = params.fetch('ingredient_name')
-  new_ingredient = Ingredient.create({:name => ingredient})
-  @recipe.ingredients().push(new_ingredient)
+  ingredient_name = params.fetch('ingredient_name')
+  new_ingredient = Ingredient.find_or_create_by({:name => ingredient_name})
+  unless @recipe.ingredients().find_by({:name => ingredient_name})
+    @recipe.ingredients().push(new_ingredient)
+  end
   redirect("/recipes/#{@recipe.id}")
 end
 
@@ -81,6 +83,7 @@ end
 #---------------------------------------------------------------------#
 
 get("/ingredients") do
+  @recipes = Recipe.all()
   @ingredients = Ingredient.all()
   erb(:ingredients)
 end

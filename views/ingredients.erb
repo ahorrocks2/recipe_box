@@ -1,7 +1,16 @@
 <h2>Ingredients</h2>
 
-<ul class="list-unstyled">
-  <% @ingredients.each() do |ingredient| %>
-    <li><a href="/ingredients/<%= ingredient.id %>"><%= ingredient.name() %></a></li>
-  <% end %>
-</ul>
+<% if @recipes.any?() && @ingredients.any?() %>
+  <ul class="list-unstyled">
+    <% @ingredients.each() do |ingredient| %>
+      <li><a href="/ingredients/<%= ingredient.id %>"><%= ingredient.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no ingredients!</p>
+<% end %>
+
+<form action="/ingredients" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button class="btn-sm btn-default" type="submit">Delete Ingredients</button>
+</form>

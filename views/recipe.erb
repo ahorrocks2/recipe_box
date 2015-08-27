@@ -32,7 +32,7 @@
   <form action="/recipes/<%=@recipe.id() %>/edit" method="post">
     <input type="hidden" name="_method" value="patch">
     <input id="ingredient_name" name="ingredient_name" type="text" placeholder="Ingredients">
-    <button class="btn-sm btn-success" type="submit">Add another Ingredient!</button>
+    <button class="btn-sm btn-default" type="submit">Add another Ingredient!</button>
   </form>
 <% end %>
 
@@ -59,7 +59,7 @@
 <br>
 <form action="/recipes/<%=@recipe.id() %>" method="post">
   <input type="hidden" name="_method" value="delete">
-  <button class="btn-sm btn-default" type="submit">Delete Recipe</button>
+  <button class="btn-sm btn-primary" type="submit">Delete Recipe</button>
 </form>
 
 <a href="/">Back</a>

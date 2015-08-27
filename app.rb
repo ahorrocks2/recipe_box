@@ -19,7 +19,7 @@ post('/recipes') do
   name = params.fetch("name")
   ingredient = params.fetch("ingredient")
   instruction = params.fetch("instruction")
-  recipe = Recipe.create({:name => name, :ingredient => ingredient, :instruction => instruction})
+  recipe = Recipe.create({:name => name, :instruction => instruction})
   redirect('/')
 end
 

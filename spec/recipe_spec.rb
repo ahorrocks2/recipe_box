@@ -11,4 +11,15 @@ describe(Recipe) do
       expect(recipe_test.categories()).to(eq([category1, category2]))
     end
   end
+
+  describe('#ingredients') do
+    it('returns the ingredients in a given recipe') do
+      ingredient1 = Ingredient.create({:name => 'Noodles'})
+      ingredient2 = Ingredient.create({:name => 'Ricotta'})
+      recipe = Recipe.create({:name => 'Lasagna', :instruction => 'Layer noodles with cheese and sauce.'})
+      recipe.ingredients().push(ingredient1)
+      recipe.ingredients().push(ingredient2)
+      expect(recipe.ingredients()).to(eq([ingredient1, ingredient2]))
+    end
+  end
 end

@@ -18,7 +18,11 @@ end
 post('/recipes') do
   name = params.fetch("name")
   recipe = Recipe.create({:name => name, :instruction => nil})
-  redirect('/')
+  if recipe.save()
+   redirect("/")
+  else
+   erb(:errors)
+ end
 end
 
 get('/recipes/:id') do

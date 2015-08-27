@@ -25,7 +25,6 @@ a:hover {
   float: center;
   border-radius: 20px;
   margin-top: 250px;
-
 }
 
 body {
@@ -35,8 +34,4 @@ body {
 
 .clearfix {
   overflow: auto;
-}
-
-h4 {
-  text-align: left;
 }

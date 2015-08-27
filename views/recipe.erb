@@ -9,7 +9,9 @@
 <% if @recipe.ingredients().any?() %>
   <h4>Ingredients: <% @recipe.ingredients().each() do |ingredient| %>
       <a href="/ingredients/<%= ingredient.id() %>"><%= ingredient.name() %></a>
+
       <% end %>
+
 <% else %>
   <p>Please add ingredients</p>
 <% end %>
@@ -34,6 +36,7 @@
   </form>
 <% end %>
 
+<h5>Index:</h5>
 <ul class="list-inline">
   <% @recipe.categories().each() do |category| %>
     <li><a href="/categories/<%= category.id %>"><%= category.name() %></a></li>

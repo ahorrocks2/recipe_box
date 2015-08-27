@@ -11,4 +11,9 @@ describe(Ingredient) do
       expect(ingredient.recipes()).to(eq([recipe1, recipe2]))
     end
   end
+
+  it('capitalizes the ingredient input') do
+    ingredient = Ingredient.create({:name => 'sauce'})
+    expect(ingredient.name()).to(eq('Sauce'))
+  end
 end

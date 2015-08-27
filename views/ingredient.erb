@@ -1,0 +1,11 @@
+<h2>Recipes with <%= @ingredient.name() %>:</h2>
+
+<% if @ingredient.recipes().any?() %>
+  <ul class="list-unstyled">
+    <% @ingredient.recipes().each() do |recipe| %>
+      <li><a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a></li>
+      <% end %>
+  </ul>
+<% else %>
+    <p>No <%= @ingredient.name() %> recipes.</p>
+<% end %>

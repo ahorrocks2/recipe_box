@@ -1,0 +1,7 @@
+<h2>Ingredients</h2>
+
+<ul class="list-unstyled">
+  <% @ingredients.each() do |ingredient| %>
+    <li><a href="/ingredients/<%= ingredient.id %>"><%= ingredient.name() %></a></li>
+  <% end %>
+</ul>

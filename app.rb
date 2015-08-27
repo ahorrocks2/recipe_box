@@ -78,3 +78,14 @@ delete('/categories/:id') do
   @category.destroy()
   redirect("/")
 end
+#---------------------------------------------------------------------#
+
+get("/ingredients") do
+  @ingredients = Ingredient.all()
+  erb(:ingredients)
+end
+
+get("/ingredients/:id") do
+  @ingredient = Ingredient.find(params.fetch('id'))
+  erb(:ingredient)
+end
